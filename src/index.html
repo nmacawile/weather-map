@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="styles.scss">
   </head>
   <body>
+    <div id="search-component">
+      <form id="search-form">
+        <label>
+          Search
+          <input placeholder="City" name="q" minlength="3" required>
+        </label>
+        <button>Search</button>
+      </form>
+    </div>
+    <div id="cities-component">
+      <h2>Cities</h2>
+      <ul class="cities-list">
+      </ul>
+    </div>
     <script src="index.ts"></script>
   </body>
 </html>
