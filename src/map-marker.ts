@@ -5,12 +5,12 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import { mapLayerConfig } from './map-layer-config';
 
 export class MapMarker {
-  private map: Map;
-  private marker: Marker;
-  private initialLat = -34.5838;
-  private initialLong = -70.9892;
+  private static map: Map;
+  private static marker: Marker;
+  private static initialLat = -34.5838;
+  private static initialLong = -70.9892;
 
-  constructor() {
+  static initialize() {
     this.map = new Map('mapid', {
       center: [this.initialLat, this.initialLong],
       zoom: 4,
@@ -20,7 +20,7 @@ export class MapMarker {
     this.marker = marker([this.initialLat, this.initialLong]).addTo(this.map);
   }
 
-  moveTo(lat: number, long: number, popupMsg = '') {
+  static moveTo(lat: number, long: number, popupMsg = '') {
     this.map.setView(new LatLng(lat, long), 4);
     this.marker.setLatLng(new LatLng(lat, long));
     if (popupMsg !== '') this.marker.bindPopup(popupMsg).openPopup();
