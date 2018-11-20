@@ -20,13 +20,19 @@ export class MapMarker {
     const mapLayer = new TileLayer(mapLayerConfig.url, mapLayerConfig.options);
 
     this.map.addLayer(mapLayer);
-    this.marker = marker([this.initialLat, this.initialLong]).addTo(this.map);
+    this.marker = marker([this.initialLat, this.initialLong], { draggable: true }).addTo(this.map);
+
+    this.marker.on('dragend', e => {
+      MapMarker.getWeatherData(e.target._latlng.lat, e.target._latlng.lng);
+    });
+
     MapMarker.locateUser();
   }
 
   static locateUser() {
     this.map.locate({ setView: true });
-    this.map.on('locationfound', e => {
+    this.map.on('locationfound', e => {      
+      MapMarker.moveTo(e.latitude, e.longitude);
       MapMarker.getWeatherData(e.latitude, e.longitude);
     });
     this.map.on('locationerror', () => {
@@ -34,8 +40,8 @@ export class MapMarker {
     });
   }
 
-  static async getWeatherData(lat, long) {
-    MapMarker.moveTo(lat, long);
+  static async getWeatherData(lat, long) {    
+    this.marker.bindPopup(`<i class="fas fa-spinner fa-spin"></i> Loading...`).openPopup();
     const data = await SearchService.latLong(lat, long);
     this.marker.bindPopup(createPopupFrom(data)).openPopup();
   }
@@ -43,7 +49,6 @@ export class MapMarker {
   static async moveTo(lat: number, long: number) {
     this.map.setView(new LatLng(lat, long), this.map.zoom);
     this.marker.setLatLng(new LatLng(lat, long));
-    this.marker.bindPopup(`<i class="fas fa-spinner fa-spin"></i> Loading...`).openPopup();
   }
 
   static async moveToLocation(data: any) {

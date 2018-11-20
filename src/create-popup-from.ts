@@ -1,10 +1,15 @@
 export function createPopupFrom(data: any) {
+  let header = '';
+  if (data.sys && data.sys.country)
+    header = 
+      `<h3 class="popup-header">
+         ${data.name}, ${data.sys.country}
+         <img src="https://openweathermap.org/images/flags/${data.sys.country.toLowerCase()}.png">  
+       </h3>`
+
   return `
-  <div class="popup">
-    <h3 class="popup-header">
-      ${data.name}, ${data.sys.country}
-      <img src="https://openweathermap.org/images/flags/${data.sys.country.toLowerCase()}.png">
-    </h3>
+  <div class="popup">    
+    ${header}   
     <div class="popup-weather-main">
       <div class="popup-weather-img">
         <img src="https://openweathermap.org/img/w/${data.weather[0].icon}.png">

@@ -69,6 +69,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1100;
   width: 100%;
   background-color: #fff;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
 
   #status {
     font-size: .9rem;
@@ -104,11 +105,11 @@ h1, h2, h3, h4, h5, h6 {
 #mapid { height: 100vh; }
 
 .popup {
+  width:200px;
   color: rgba(0,0,0,.84);
   .popup-header {
     font-size: 1rem;
     display: block;
-    width:200px;
     margin: 0;
   }
 
