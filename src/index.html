@@ -4,13 +4,17 @@
     <meta charset="utf=8">
     <title>Rain Check</title>
     <meta name="viewport" content="initial-scale=1.0, width=device-width, shrink-to-fit=no">
-    <link rel="stylesheet" href="styles.scss">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.scss">
   </head>
   <body>
     <div id="search-component">
       <form id="search-form" autocomplete="off">
-        <input id="search-bar" placeholder="City" name="q" minlength="3" required>
+        <div id="search-field">
+          <input id="search-bar" placeholder="City or municipality" name="q" minlength="3" required>
+          <i id="search-icon" class="fas fa-search"></i>
+        </div>
         <div id="cities-component" class="hidden">
           <div id="status" class="hidden"></div>
         </div>
