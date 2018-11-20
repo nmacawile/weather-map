@@ -13,7 +13,7 @@ export class MapMarker {
   static initialize() {
     this.map = new Map('mapid', {
       center: [this.initialLat, this.initialLong],
-      zoom: 4,
+      zoom: 8,
     });
     const mapLayer = new TileLayer(mapLayerConfig.url, mapLayerConfig.options);
     this.map.addLayer(mapLayer);
@@ -21,7 +21,7 @@ export class MapMarker {
   }
 
   static moveTo(lat: number, long: number, popupMsg = '') {
-    this.map.setView(new LatLng(lat, long), 4);
+    this.map.setView(new LatLng(lat, long), this.map.zoom);
     this.marker.setLatLng(new LatLng(lat, long));
     if (popupMsg !== '') this.marker.bindPopup(popupMsg).openPopup();
   }
