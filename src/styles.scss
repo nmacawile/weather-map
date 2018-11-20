@@ -3,6 +3,11 @@ html, body {
   font-family: 'Roboto', sans-serif;
   color: rgba(0,0,0,.84);
   font-size: 18px;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
 }
 
 .hidden {
@@ -35,6 +40,7 @@ html, body {
 
     #search-bar {
       color: rgba(0,0,0,.84);
+      font-weight: 300;
       outline: 0;
       border: 0;
       border-radius: 4px;
@@ -43,6 +49,7 @@ html, body {
 
       &::placeholder {
         color: rgba(0,0,0,.38);
+
       }
 
       &::-ms-placeholder {
@@ -96,3 +103,39 @@ html, body {
 
 #mapid { height: 100vh; }
 
+.popup {
+  color: rgba(0,0,0,.84);
+  .popup-header {
+    font-size: 1rem;
+    display: block;
+    width:200px;
+    margin: 0;
+  }
+
+  .popup-weather-main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .popup-weather-img {
+      margin-right: 8px;
+    }
+
+    .popup-temp {
+      font-weight: 400;
+      .value {
+        font-size: 2rem;
+        margin: 0;
+      }
+
+      .unit {
+        font-size: 1rem;
+      }
+    }
+    
+    .popup-weather-desc {
+      font-size: .8rem;
+    }
+  }
+}

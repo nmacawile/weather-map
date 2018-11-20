@@ -36,15 +36,21 @@ export class CityComponent {
   }
 
   private popupTemplate() {
-    return `<strong>${this.data.name}, ${
-      this.data.sys.country
-    }</strong> <img src="https://openweathermap.org/images/flags/${this.data.sys.country.toLowerCase()}.png">
-    <br>
-    ${this.data.main.temp} °C
-    <img src="https://openweathermap.org/img/w/${
-      this.data.weather[0].icon
-    }.png"><br>
-    ${this.data.weather[0].description}
+    return `
+    <div class="popup">
+      <h3 class="popup-header">
+        ${this.data.name}, ${this.data.sys.country}
+        <img src="https://openweathermap.org/images/flags/${this.data.sys.country.toLowerCase()}.png">
+      </h3>
+      <div class="popup-weather-main">
+        <div class="popup-weather-img">
+          <img src="https://openweathermap.org/img/w/${this.data.weather[0].icon}.png">
+        </div>
+        <h4 class="popup-temp"><span class="value">${this.data.main.temp}</span>
+        <span class="unit">°C</span></h4>
+      </div>
+      <div class="popup-weather-desc">${this.data.weather[0].description.toUpperCase()}</div>
+    </div>
     `
   }
 }
