@@ -21,17 +21,23 @@ export class MapMarker {
 
     this.map.addLayer(mapLayer);
     this.marker = marker([this.initialLat, this.initialLong]).addTo(this.map);
-
     MapMarker.locateUser();
   }
 
   static locateUser() {
     this.map.locate({ setView: true });
-    this.map.on('locationfound', async e => {
-      MapMarker.moveTo(e.latitude, e.longitude);
-      const data = await SearchService.latLong(e.latitude, e.longitude);
-      this.marker.bindPopup(createPopupFrom(data)).openPopup();
+    this.map.on('locationfound', e => {
+      MapMarker.getWeatherData(e.latitude, e.longitude);
     });
+    this.map.on('locationerror', () => {
+      MapMarker.getWeatherData(this.initialLat, this.initialLong);
+    });
+  }
+
+  static async getWeatherData(lat, long) {
+    MapMarker.moveTo(lat, long);
+    const data = await SearchService.latLong(lat, long);
+    this.marker.bindPopup(createPopupFrom(data)).openPopup();
   }
 
   static async moveTo(lat: number, long: number) {
