@@ -21,4 +21,21 @@ export class SearchService {
     }
     return results;
   }
+
+  static async latLong(lat, lon) {
+    const url = 'https://api.openweathermap.org/data/2.5/weather';
+    const units = 'metric';
+    const params = { lat, lon, appid, units };
+    let result;
+
+    try {
+      const locationQuery = await fetch(url + stringifyParams(params));
+      const locationData = await locationQuery.json();
+      console.log(locationData);
+      result = locationData;
+    } catch (error) {
+      console.log(error);
+    }
+    return result;
+  }
 }
