@@ -39,9 +39,14 @@ export class SearchComponent {
     this.statusIndicator = document.getElementById('status');
   }
 
-  showStatus(text) {
+  showStatus(text, icon = '') {
     this.statusIndicator.classList.remove('hidden');
-    this.statusIndicator.textContent = text;
+    let i = ''
+    if (icon !== '') {
+      i = `<i class='fas fa-${icon}'></i> `
+    }
+
+    this.statusIndicator.innerHTML = i + text;
   }
 
   hideStatus() {
@@ -49,13 +54,13 @@ export class SearchComponent {
   }
 
   search(query: string) {
-    this.showStatus('User is typing...');
+    this.showStatus('User is typing...', 'keyboard');
     this.typing = true;
     Debouncer.debounce(async () => {
-      this.showStatus('Loading...');
+      this.showStatus('Loading...', 'spinner fa-spin');
       const cities = await SearchService.search(query);
       this.citiesComponent.build(cities);
-      cities.length ?  this.hideStatus() : this.showStatus('No results found.');
+      cities.length ?  this.hideStatus() : this.showStatus('No results found.', 'times');
       this.typing = false;
     }, 500);
   }
