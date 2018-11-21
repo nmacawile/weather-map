@@ -1,4 +1,4 @@
-import { Map, TileLayer, LatLng, marker, Marker } from 'leaflet';
+import { Map, TileLayer, LatLng, marker, Marker, LatLngBounds } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -13,9 +13,12 @@ export class MapMarker {
   private static initialLong = -0.1277;
 
   static initialize() {
+    const bounds = new LatLngBounds(new LatLng(-180, -180), new LatLng(180, 180));
     this.map = new Map('mapid', {
       center: [this.initialLat, this.initialLong],
       zoom: 8,
+      maxBounds: bounds,
+      maxBoundsViscosity: 1.0,
     });
     const mapLayer = new TileLayer(mapLayerConfig.url, mapLayerConfig.options);
 
@@ -30,7 +33,7 @@ export class MapMarker {
   }
 
   static locateUser() {
-    this.map.locate({ setView: true });
+    this.map.locate({ setView: true, maxZoom: 10 });
     this.map.on('locationfound', e => {      
       MapMarker.moveTo(e.latitude, e.longitude);
       MapMarker.getWeatherData(e.latitude, e.longitude);
