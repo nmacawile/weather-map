@@ -1,4 +1,4 @@
-import { Map, TileLayer, LatLng, marker, Marker, LatLngBounds } from 'leaflet';
+import { Map, TileLayer, LatLng, marker, Marker, LatLngBounds, Browser } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
@@ -21,6 +21,10 @@ export class MapMarker {
       maxBoundsViscosity: 1.0,
     });
     const mapLayer = new TileLayer(mapLayerConfig.url, mapLayerConfig.options);
+
+    if (Browser.mobile) {
+       this.map.removeControl(this.map.zoomControl);
+    }
 
     this.map.addLayer(mapLayer);
     this.marker = marker([this.initialLat, this.initialLong], { draggable: true }).addTo(this.map);
