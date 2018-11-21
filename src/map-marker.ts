@@ -20,12 +20,9 @@ export class MapMarker {
       maxBounds: bounds,
       maxBoundsViscosity: 1.0,
     });
+
+    this.map.removeControl(this.map.zoomControl);
     const mapLayer = new TileLayer(mapLayerConfig.url, mapLayerConfig.options);
-
-    if (Browser.mobile) {
-       this.map.removeControl(this.map.zoomControl);
-    }
-
     this.map.addLayer(mapLayer);
     this.marker = marker([this.initialLat, this.initialLong], { draggable: true }).addTo(this.map);
 
