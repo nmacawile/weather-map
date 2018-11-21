@@ -12,8 +12,6 @@ export class SearchService {
       if (q && q.length > 2) {
         const locationQuery = await fetch(url + stringifyParams(params));
         const locationData = await locationQuery.json();
-        console.log(locationData.list);
-
         results = locationData.list;
       }
     } catch (error) {
@@ -31,7 +29,6 @@ export class SearchService {
     try {
       const locationQuery = await fetch(url + stringifyParams(params));
       const locationData = await locationQuery.json();
-      console.log(locationData);
       result = locationData;
     } catch (error) {
       console.log(error);
