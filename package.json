@@ -6,11 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel src/index.html src/index.ts",
-    "build": "parcel build src/*"
+    "build": "parcel build src/* --out-dir=public --public-url=./ --no-source-maps --target node --bundle-node-modules"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cssnano": "^4.1.7",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "parcel-plugin-clean-dist": "0.0.6",
     "sass": "^1.14.3",
